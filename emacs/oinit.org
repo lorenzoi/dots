@@ -1,0 +1,180 @@
+#+TITLE: Org init stuff :)
+
+* Plugins
+** Magit
+Magit is an awesome and really useful plugin for dealing with projects and git
+commits, it makes git fun!
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+      :ensure t
+      :bind ("C-x g" . magit-status))
+#+END_SRC
+
+** YASnippet
+YASnippet is a template plugin that gives the user the power to create
+templates for statements in code.
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :init
+    (yas-global-mode 1))
+
+  ;; Also install the Collection of Snippets by Andrea Crotti
+  (use-package yasnippet-snippets
+    :ensure t)
+#+END_SRC
+
+** ZTree
+Ztree is a project dedicated to implementation of several text-tree applications inside GNU Emacs.
+Yes I did copy this from their github readme, no I have no shame.
+#+BEGIN_SRC emacs-lisp
+  (use-package ztree
+    :ensure t
+	:bind ("C-x C-d" . ztree-dir))
+
+#+END_SRC
+
+** FlyCheck
+FlyCheck is a error checking plugin. Tha- Thats what it does.
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init
+    (global-flycheck-mode))
+
+  (add-hook 'text-mode-hook 'flyspell-mode)
+
+  (use-package flycheck-rust
+    :ensure t
+    :init
+    (with-eval-after-load 'rust-mode
+      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+#+END_SRC
+
+** Projectile
+Projectile is a project interaction library for Emacs.
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :bind (("C-p"     . projectile-command-map)
+           ("C-c p"   . projectile-command-map))
+    :init
+    (projectile-mode +1))
+#+END_SRC
+
+** Auto-Complete
+Self explanitory.
+#+BEGIN_SRC emacs-lisp
+  (use-package auto-complete
+    :ensure t
+    :init
+    (ac-config-default))
+#+END_SRC
+
+** Multiple Cursors
+Again, pretty self-explanitory
+#+BEGIN_SRC emacs-lisp
+  (use-package multiple-cursors
+    :ensure t
+    :bind (("C-S-c C-S-c" . mc/edit-lines)
+           ("C->"         . mc/mark-next-like-this)
+           ("C-<"         . mc/mark-previous-like-this)
+           ("C-c C->"     . mc/mark-all-like-this)))
+#+END_SRC
+
+** Evil-Mode
+The Extensible VI Layer for Emacs
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t)
+
+    (evil-mode 1)
+
+  (use-package org-evil
+    :ensure t)
+#+END_SRC
+
+** Ledger-Mode
+Ledger mode is an org-mode like mode that handles finances.
+I probably won't use it much right now, but probably in the
+future.
+#+BEGIN_SRC emacs-lisp
+  (use-package ledger-mode
+    :ensure t)
+#+END_SRC
+* Themes and /A e s t h e t i k s/
+** Source-Code Highlighting
+*** Rust-Mode
+Syntax Highlighting for Rust
+#+BEGIN_SRC emacs-lisp
+	(use-package rust-mode
+		:ensure t)
+#+END_SRC
+
+*** Haskell-Mode
+Syntax Highlighting for Haskell
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+    :ensure t
+    :bind ("C-c C-b" . haskell-interactive-mode-begin)
+    :init
+    (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
+#+END_SRC
+
+*** Outshine
+Outshine pretty much is an org-mode wrapper for other modes.
+#+BEGIN_SRC emacs-lisp
+  (use-package outshine
+    :ensure t
+    :init
+    (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+    (add-hook 'prog-mode-hook 'outline-minor-mode))
+#+END_SRC
+
+** Neotree
+A Emacs tree plugin like NerdTree for Vim.
+#+BEGIN_SRC emacs-lisp
+  (use-package neotree
+    :ensure t
+    :bind ("<f6>" . neotree-toggle)
+    :init
+    (setq neo-theme 'ascii))
+#+END_SRC
+
+** Solarized Dark Theme
+I Like Solarized Dark
+#+BEGIN_SRC emacs-lisp
+  (use-package solarized-theme
+    :ensure t)
+
+  (defun my/apply-solarized-theme ()
+    (setq solarized-use-variable-pitch nil)
+    (setq solarized-height-plus-1 1.0)
+    (setq solarized-height-plus-2 1.0)
+    (setq solarized-height-plus-3 1.0)
+    (setq solarized-height-plus-4 1.0)
+    (setq solarized-high-contrast-mode-line t)
+    (load-theme 'solarized-dark t))
+  (my/apply-solarized-theme)
+#+END_SRC
+
+** Diminish Mode
+Get rid of the junk on the Mode Line
+#+BEGIN_SRC emacs-lisp
+  (use-package diminish
+    :ensure t
+    :init
+    (diminish 'auto-complete-mode)
+    (diminish 'projectile-mode "Proj")
+    (diminish 'flycheck-mode)
+    (diminish 'flyspell-mode)
+    (diminish 'yas-minor-mode))
+#+END_SRC
+
+** Powerline
+#+BEGIN_SRC emacs-lisp
+  (use-package powerline
+    :ensure t
+    :config
+    (powerline-center-evil-theme))
+#+END_SRC
