@@ -57,7 +57,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = date i3
 modules-center = xwindow
-modules-right = filesystem pulseaudio memory cpu wlan eth powermenu
+modules-right = filesystem pulseaudio memory cpu wlan eth
 
 tray-position = right
 tray-padding = 2

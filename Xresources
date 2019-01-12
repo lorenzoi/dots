@@ -56,9 +56,11 @@
 *color15: 		S_base3
 
 !! URxvt Config
-URxvt*font: xft:More Perfect DOS VGA:fontformat=truetype:size=12:anitaliasing=true
-URxvt*boldFont: xft:More Perfect DOS VGA:fontformat=truetype:size=12:anitaliasing=true
-
-
-
+URxvt*font: xft:More Perfect DOS VGA:size=12:anitaliasing=true
+URxvt*boldFont: xft:More Perfect DOS VGA:size=12:anitaliasing=true
 URxvt*scrollBar: false
+
+!! Xterm Config
+!xterm*font: xft:More Perfect DOS VGA:size=12:anitaliasing=true
+xterm*faceName: More Perfect DOS VGA
+xterm*faceSize: 12

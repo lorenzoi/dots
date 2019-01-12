@@ -84,9 +84,18 @@
          (newline-mark ?\n   [?\xB6 ?\n] [?$ ?\n])))
 ;; Enable Q-Sharp Mode
 ;; Yes Q# Like Microsoft's Quantum computing language Q#
-(add-to-list 'load-path "~/.emacs.d/qsharp-mode/")
-(autoload 'qsharp-mode "qsharp-mode" "Major mode for editing Q# code." t)
-(add-to-list 'auto-mode-alist '("\\.qs$" . qsharp-mode))
+;(add-to-list 'load-path "~/.emacs.d/qsharp-mode/")
+
+;(autoload 'qsharp-mode "qsharp-mode" "Major mode for editing Q# code." t)
+;(add-to-list 'auto-mode-alist '("\\.qs$" . qsharp-mode))
+
+;; Load Slime
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+  ;; Replace "sbcl" with the path to your implementation
+  (setq inferior-lisp-program "sbcl")
+
+;; Exec Path
+(add-to-list 'exec-path "/home/lorenzo/.local/bin")
 
 ;;(provide 'init)
 ;;; init.el ends here

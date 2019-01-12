@@ -8,6 +8,11 @@ commits, it makes git fun!
   (use-package magit
       :ensure t
       :bind ("C-x g" . magit-status))
+  (use-package magithub
+    :after magit
+    :config
+    (magithub-feature-autoinject t)
+    (setq magithub-clone-default-directory "~/github"))
 #+END_SRC
 
 ** YASnippet
@@ -82,18 +87,6 @@ Again, pretty self-explanitory
            ("C-c C->"     . mc/mark-all-like-this)))
 #+END_SRC
 
-** Evil-Mode
-The Extensible VI Layer for Emacs
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :ensure t)
-
-    (evil-mode 1)
-
-  (use-package org-evil
-    :ensure t)
-#+END_SRC
-
 ** Ledger-Mode
 Ledger mode is an org-mode like mode that handles finances.
 I probably won't use it much right now, but probably in the
@@ -102,6 +95,13 @@ future.
   (use-package ledger-mode
     :ensure t)
 #+END_SRC
+** CIDER
+Cider is a REPL for communication with the clojure REPL.
+#+BEGIN_SRC emacs-lisp
+  (use-package cider
+    :ensure t)
+#+END_SRC
+
 * Themes and /A e s t h e t i k s/
 ** Source-Code Highlighting
 *** Rust-Mode
@@ -127,7 +127,7 @@ Outshine pretty much is an org-mode wrapper for other modes.
   (use-package outshine
     :ensure t
     :init
-    (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+    (add-hook 'outline-minor-mode-hook 'outshine-mode)
     (add-hook 'prog-mode-hook 'outline-minor-mode))
 #+END_SRC
 
@@ -141,8 +141,8 @@ A Emacs tree plugin like NerdTree for Vim.
     (setq neo-theme 'ascii))
 #+END_SRC
 
-** Solarized Dark Theme
-I Like Solarized Dark
+** Solarized Light Theme
+I Like Solarized Light
 #+BEGIN_SRC emacs-lisp
   (use-package solarized-theme
     :ensure t)
@@ -157,9 +157,16 @@ I Like Solarized Dark
     (load-theme 'solarized-dark t))
   (my/apply-solarized-theme)
 #+END_SRC
+** Xresources Theme
+#+BEGIN_SRC emacs-lisp
+  ;(use-package xresources-theme
+    ;:ensure t
+    ;:init
+    ;(load-theme 'xresources t))
+#+END_SRC
 
 ** Diminish Mode
-Get rid of the junk on the Mode Line
+   Get rid of the junk on the Mode Line
 #+BEGIN_SRC emacs-lisp
   (use-package diminish
     :ensure t
@@ -170,11 +177,10 @@ Get rid of the junk on the Mode Line
     (diminish 'flyspell-mode)
     (diminish 'yas-minor-mode))
 #+END_SRC
-
-** Powerline
+** Rainbow Delimiters Mode
 #+BEGIN_SRC emacs-lisp
-  (use-package powerline
+  (use-package rainbow-delimiters
     :ensure t
-    :config
-    (powerline-center-evil-theme))
+    :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
